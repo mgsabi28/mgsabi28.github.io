@@ -1,0 +1,12 @@
+.clasprc.json
+.env
+.env.*
+.agents/
+node_modules/
+*.log
+googleid.txt
+abikasse link/
+.clasp.json
+deploy.ps1
+Code.js
+appsscript.json
