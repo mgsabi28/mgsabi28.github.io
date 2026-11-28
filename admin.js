@@ -252,17 +252,35 @@
         lbl.appendChild(dot);
         lbl.appendChild(nameTxt);
 
+        const inputWrap = document.createElement('div');
+        inputWrap.className = 'currency-input-wrap';
+
         const input = document.createElement('input');
         input.type = 'number';
+        input.inputMode = 'decimal';
+        input.setAttribute('inputmode', 'decimal');
         input.min = '0';
         input.step = '0.01';
         input.className = 'admin-budget-input';
         input.value = String(cat.budget || 0);
-        input.setAttribute('aria-label', 'Budget für ' + cat.name);
+        input.setAttribute('aria-label', 'Budget für ' + cat.name + ' (€)');
+        input.addEventListener('keydown', function (ev) {
+          if (ev.key === 'e' || ev.key === 'E' || ev.key === '+' || ev.key === '-') {
+            ev.preventDefault();
+          }
+        });
         budgetInputs.set(cat.id, input);
 
+        const suffix = document.createElement('span');
+        suffix.className = 'currency-input-suffix';
+        suffix.setAttribute('aria-hidden', 'true');
+        suffix.textContent = '€';
+
+        inputWrap.appendChild(input);
+        inputWrap.appendChild(suffix);
+
         row.appendChild(lbl);
-        row.appendChild(input);
+        row.appendChild(inputWrap);
         list.appendChild(row);
       });
       form.appendChild(list);
